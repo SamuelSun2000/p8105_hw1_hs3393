@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ### load packages
-```{r, echo = FALSE}
+```{r, message = FALSE}
 data("penguins", package = "palmerpenguins")
 library(ggplot2)
 library(tidyverse)
@@ -23,10 +23,10 @@ The dataset `penguins` describes:
 3. The data also describes the bill length, bill depth, flipper length, body mass, sex of the penguins.
 4. The data includes the year of observation.
 
-The size of the dataset is `r nrow(penguins)` * `r ncol(penguins)`. The mean of flipper length is `r mean(penguins$flipper_length_mm)` mm.
+The size of the dataset is `r nrow(penguins)` (rows) * `r ncol(penguins)`(columns). The mean of flipper length is `r mean(na.omit(penguins$flipper_length_mm))` mm when NA is removed.
 
 ### plot and save figure
-```{r}
+```{r, message= FALSE, warning=FALSE}
 ggplot(data = penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 
 ggsave(filename = "flipper_length vs bill_length.png", width = 5, height = 2.5)
@@ -51,7 +51,7 @@ for (i in 1:4){
 The mean function works on the sample from normal distribution and their logical vector indicating wheter they are greater than zero. However, it cannot work on character vector and factor vector.
 
 ### converting variable types
-```{r, echo = FALSE}
+```{r, results = 'hide', message = FALSE, warning=FALSE}
 y = df$x > 0
 z = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 w = factor(c(rep( c("a","b","c"), 3), "c"))
@@ -62,7 +62,3 @@ as.numeric(w)
 ```
 
 The result indicates that R can get the mean of a data when their data types are logical, because it can convert logical data to numerical data (True = 1 and False  = 0). R cannot convert character into numeric data, so it cannot take mean of them. However, while R can convert factor to numeric data based on their levels, it still cannot get their mean.
-
-
-
-
