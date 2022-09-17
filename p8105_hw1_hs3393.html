@@ -386,7 +386,7 @@ Torgersen.</li>
 body mass, sex of the penguins.</li>
 <li>The data includes the year of observation.</li>
 </ol>
-<p>The size of the dataset is 344 (rows) * 8(columns). The mean of
+<p>The size of the dataset is 344 (rows) * 8 (columns). The mean of
 flipper length is 200.9152047 mm when NA is removed.</p>
 <div id="plot-and-save-figure" class="section level3">
 <h3>plot and save figure</h3>
@@ -400,17 +400,17 @@ flipper length is 200.9152047 mm when NA is removed.</p>
 <div id="create-a-dataframe" class="section level3">
 <h3>Create a dataframe</h3>
 <pre class="r"><code>df &lt;- tibble(
-  x = rnorm(10),
-  y = x &gt; 0 ,
-  z = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;),
-  w = factor(c(rep( c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;), 3), &quot;c&quot;))
+  list_norm = rnorm(10),
+  list_logical = list_norm &gt; 0 ,
+  list_char = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;),
+  list_factor = factor(c(rep( c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;), 3), &quot;c&quot;))
 )
 
 for (i in 1:4){
   print((mean(pull(df , i))))
 }</code></pre>
-<pre><code>## [1] 0.6398405
-## [1] 0.8</code></pre>
+<pre><code>## [1] -0.6381458
+## [1] 0.3</code></pre>
 <pre><code>## Warning in mean.default(pull(df, i)): argument is not numeric or logical:
 ## returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
@@ -423,19 +423,18 @@ However, it cannot work on character vector and factor vector.</p>
 </div>
 <div id="converting-variable-types" class="section level3">
 <h3>converting variable types</h3>
-<pre class="r"><code>y = df$x &gt; 0
-z = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;)
-w = factor(c(rep( c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;), 3), &quot;c&quot;))
+<pre class="r"><code>list_logical = c(T, F, T, F, F, T)
+list_char = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;)
+list_factor = factor(c(rep( c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;), 3), &quot;c&quot;))
 
-as.numeric(y)
-as.numeric(z)
-as.numeric(w)</code></pre>
+as.numeric(list_logical)
+as.numeric(list_char)
+as.numeric(list_factor)</code></pre>
 <p>The result indicates that R can get the mean of a data when their
 data types are logical, because it can convert logical data to numerical
 data (True = 1 and False = 0). R cannot convert character into numeric
-data, so it cannot take mean of them. However, while R can convert
-factor to numeric data based on their levels, it still cannot get their
-mean.</p>
+data, so it cannot get their mean. Although R can convert factor to
+numeric data based on their levels, R still cannot get their mean.</p>
 </div>
 </div>
 
